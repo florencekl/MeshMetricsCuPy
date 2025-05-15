@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Tuple, Union
 
-import numpy as np
+from . import xp as np
 import SimpleITK as sitk
 import vtk
 

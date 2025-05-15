@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "MeshMetrics"
+version = "0.1"
+description = "Library to compute distance-based performance metrics for image segmentation tasks."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Gasper Podobnik" }
+]
+requires-python = ">=3.7"
+
+dependencies = [
+    "numpy",
+    "SimpleITK",
+    "SimpleITKUtilities",
+    "vtk"
+]
+
+[project.urls]
+homepage = "https://github.com/gasperpodobnik/MeshMetrics"
+
+# Add CuPy dependencies for different CUDA versions
+[project.optional-dependencies]
+cupy-cuda11x = ["cupy-cuda11x"]
+cupy-cuda12x = ["cupy-cuda12x"]
+cupy-rocm = ["cupy-rocm"]

@@ -2,7 +2,7 @@ from functools import lru_cache
 import logging
 from typing import Tuple, Union
 
-import numpy as np
+from . import xp as np
 import vtk
 import SimpleITK as sitk
 from .utils import (
