@@ -25,6 +25,9 @@ homepage = "https://github.com/gasperpodobnik/MeshMetrics"
 
 # Add CuPy dependencies for different CUDA versions
 [project.optional-dependencies]
-cupy-cuda11x = ["cupy-cuda11x"]
-cupy-cuda12x = ["cupy-cuda12x"]
-cupy-rocm = ["cupy-rocm"]
+cuda11x = ["cupy-cuda11x"]
+cuda12x = ["cupy-cuda12x"]
+rocm = ["cupy-rocm"]
+
+[tool.setuptools.packages.find]
+where = ["."]

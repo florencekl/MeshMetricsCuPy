@@ -2,7 +2,7 @@ from functools import lru_cache
 import logging
 from typing import Tuple, Union
 
-from . import xp as np
+from .check_cupy import xp as np
 import vtk
 import SimpleITK as sitk
 from .utils import (
@@ -383,7 +383,8 @@ class DistanceMetrics:
     def perc_surface_dist(dists, b_sizes, perc) -> float:
         if len(dists) > 0:
             cum_surfel_areas = np.cumsum(b_sizes) / np.sum(b_sizes)
-            idx = np.searchsorted(cum_surfel_areas, perc / 100.0)
+            print(int(perc / 100.0))
+            idx = np.searchsorted(cum_surfel_areas, int(perc / 100.0))
             idx = min(idx, len(dists) - 1)
             return dists[idx]
         else:

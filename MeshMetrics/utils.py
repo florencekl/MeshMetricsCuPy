@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Tuple, Union
 
-from . import xp as np
+from .check_cupy import xp as np
 import SimpleITK as sitk
 import vtk
 
@@ -325,7 +325,7 @@ def vtk_create_surface_from_polydata(polydata: vtk.vtkPolyData, z_offset: float)
     The function explicitly follows edges to ensure proper traversal.
     """
 
-    z_coord = vtk_to_numpy(polydata.GetPoints().GetData())[:,-1]
+    z_coord = np.array(vtk_to_numpy(polydata.GetPoints().GetData())[:,-1])
     assert np.all(z_coord[0] == z_coord), "Polyline must be planar in the z-direction"
 
     # Ensure the input contains lines
@@ -490,12 +490,12 @@ def vtk_centroids2surface_measurements(
     vtk_p2v_dist.ComputeCellCenterDistanceOn()
     vtk_p2v_dist.ComputeSecondDistanceOn()
     vtk_p2v_dist.Update()
-    dists_ref2pred = vtk_to_numpy(
+    dists_ref2pred = np.array(vtk_to_numpy(
         vtk_p2v_dist.GetOutput().GetCellData().GetArray("Distance")
-    )
-    dists_pred2ref = vtk_to_numpy(
+    ))
+    dists_pred2ref = np.array(vtk_to_numpy(
         vtk_p2v_dist.GetSecondDistanceOutput().GetCellData().GetArray("Distance")
-    )
+    ))
     surfel_areas_ref = vtk_compute_cell_sizes(ref_mesh)
     surfel_areas_pred = vtk_compute_cell_sizes(pred_mesh)
 
